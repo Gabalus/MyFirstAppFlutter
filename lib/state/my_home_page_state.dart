@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../page/MyHomePage.dart';
-import '../page/MainPage.dart';
-import '../screen/FavouritesScreen.dart';
-import '../screen/MainScreen.dart';
-import '../screen/SettingsScreen.dart';
+import '../page/main_page.dart';
+import '../page/my_home_page.dart';
+import '../screen/favourites_screen.dart';
+import '../screen/settings_screen.dart';
 
 class MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;

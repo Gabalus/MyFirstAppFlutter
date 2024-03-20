@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../page/MainPage.dart';
-import '../screen/FoodScreen.dart';
-import '../screen/MainScreen.dart';
+import '../page/main_page.dart';
+import '../screen/food_screen.dart';
+import '../screen/main_screen.dart';
 
 class MainState extends State<MainPage> {
   int _currentIndex = 0;
   List<Widget> _screens = [];
+
   @override
   void initState() {
     super.initState();
@@ -15,13 +16,13 @@ class MainState extends State<MainPage> {
       FoodScreen(changePage: changePage),
     ];
   }
-  void changePage(int index){
-    _currentIndex=index;
+
+  void changePage(int index) {
+    _currentIndex = index;
     if (mounted) {
-    setState(() {});
+      setState(() {});
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_infinite_list/state/post_bloc.dart';
 
-import '../bloc/post_bloc.dart';
-import '../screen/BottomLoader.dart';
-import '../screen/PostListItem.dart';
+import '../page/post_list_page.dart';
+import '../screen/post_list_item.dart';
 
-class PostsList extends StatefulWidget {
-  const PostsList({super.key});
-
-  @override
-  State<PostsList> createState() => _PostsListState();
-}
-
-class _PostsListState extends State<PostsList> {
+class PostsListState extends State<PostsList> {
   final _scrollController = ScrollController();
+  int index = 1;
+
+  PostsListState();
 
   @override
   void initState() {
@@ -32,17 +28,20 @@ class _PostsListState extends State<PostsList> {
             if (state.posts.isEmpty) {
               return const Center(child: Text('no posts'));
             }
-            return ListView.builder(
+            return Container(
+                child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return index >= state.posts.length
-                    ? const BottomLoader()
-                    : PostListItem(post: state.posts[index]);
+                if (index == state.posts.length)
+                  return Center(child: CircularProgressIndicator());
+                if (index > state.posts.length) return SizedBox.shrink();
+                if (index < state.posts.length)
+                  return PostListItem(post: state.posts[index]);
               },
               itemCount: state.hasReachedMax
                   ? state.posts.length
-                  : state.posts.length + 1,
+                  : state.posts.length + 30,
               controller: _scrollController,
-            );
+            ));
           case PostStatus.initial:
             return const Center(child: CircularProgressIndicator());
         }
